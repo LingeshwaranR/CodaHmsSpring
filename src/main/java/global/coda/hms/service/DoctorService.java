@@ -116,9 +116,9 @@ public class DoctorService {
      *
      * @return the all patients under all doctors
      */
-    public List<Doctor> getAllPatientsUnderAllDoctors() {
+    public List<Doctor> getAllPatientsUnderAllDoctors(int id) {
         LOGGER.traceEntry();
-        List<Doctor> doctorList = mapper.getAllPatientUnderAllDoctors();
+        List<Doctor> doctorList = mapper.getAllPatientUnderAllDoctors(id);
         LOGGER.traceExit(doctorList);
         return doctorList;
     }

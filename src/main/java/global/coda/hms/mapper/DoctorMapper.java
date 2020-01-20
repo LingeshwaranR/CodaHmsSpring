@@ -3,9 +3,11 @@ package global.coda.hms.mapper;
 import global.coda.hms.model.Doctor;
 import global.coda.hms.model.Patient;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -104,11 +106,20 @@ public interface DoctorMapper {
      * @return the all patient under all doctors
      */
 //PATIENT LIST UNDER ALL DOCTOR
-    @Select(" select user2.pk_user_id,user2.email,user2.password,specialist,user2.username,user1.pk_user_id,user1.username,user1.email,user1.password ,age,area,city,state from t_user user1 join t_patient on user1.pk_user_id = t_patient.fk_user_id  join t_patient_has_doctor on t_patient_has_doctor.fk_patient_id = user1.pk_user_id  join t_user user2 on t_patient_has_doctor.fk_doctor_id = user2.pk_user_id join t_doctor on t_doctor.fk_user_id = user2.pk_user_id where user1.is_active =1 and t_patient.is_active=1 and t_patient_has_doctor.is_active=1 and t_doctor.is_active = 1")
-    @Results( {
-            @Result(column = "pk_user_id", property = "pkUserId")
+    @Select("<script> select pk_user_id,username,email,password,fk_role_id,specialist from t_user join t_doctor on t_user.pk_user_id = t_doctor.fk_user_id  where t_user.is_active=1 and t_doctor.is_active=1 <if test='id !=0'> and  pk_user_id=#{id} </if> </script>")
+    @Results(value = {
+            @Result(property="pkUserId", column="pk_user_id"),
+            @Result(property="username", column="username"),
+            @Result(property="email", column="email"),
+            @Result(property="password", column="password"),
+            @Result(property="specialist", column="specialist"),
+            @Result(property="fkRoleId", column="fk_role_id"),
+            @Result(property="patientList", javaType=List.class, column="pk_user_id",
+                    many=@Many(select  ="getPatientUnderADoctor"))
     })
-    List<Doctor> getAllPatientUnderAllDoctors();
+    List<Doctor> getAllPatientUnderAllDoctors(int id);
+
+
 
 
 }

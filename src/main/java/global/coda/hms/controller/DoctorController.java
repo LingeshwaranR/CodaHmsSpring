@@ -3,7 +3,6 @@ package global.coda.hms.controller;
 
 import global.coda.hms.model.CustomResponse;
 import global.coda.hms.model.Doctor;
-import global.coda.hms.model.Patient;
 import global.coda.hms.service.DoctorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -118,33 +118,22 @@ public class DoctorController {
     /**
      * Gets all patients under a doctor.
      *
-     * @param id the id
+     * @param doctorId the id
      * @return the all patients under a doctor
      */
-    @GetMapping("/{id}/patients")
-    public CustomResponse<List<Patient>> getAllPatientsUnderADoctor(@PathVariable("id") int id) {
-        LOGGER.traceEntry();
-        CustomResponse<List<Patient>> customResponse = new CustomResponse<>();
+    @GetMapping("/patients")
+    public CustomResponse<List<Doctor>> getAllPatientsUnderADoctors(@PathParam("doctorId") Integer doctorId) {
+        LOGGER.entry(doctorId);
+        if (doctorId == null) {
+            doctorId = 0;
+        }
+        CustomResponse<List<Doctor>> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
         customResponse.setStatus(200);
-        customResponse.setObject(doctorService.getAllPatientUnderADoctor(id));
+        customResponse.setObject(doctorService.getAllPatientsUnderAllDoctors(doctorId));
         LOGGER.traceExit(customResponse);
         return customResponse;
     }
 
-    /**
-     * Gets all patients under all doctors.
-     *
-     * @return the all patients under all doctors
-     */
-    @GetMapping("/all/patients")
-    public CustomResponse<List<Doctor>> getAllPatientsUnderAllDoctors() {
-        LOGGER.traceEntry();
-        CustomResponse<List<Doctor>> customResponse = new CustomResponse<>();
-        customResponse.setSuccess(true);
-        customResponse.setStatus(200);
-        customResponse.setObject(doctorService.getAllPatientsUnderAllDoctors());
-        LOGGER.traceExit(customResponse);
-        return customResponse;
-    }
+
 }
