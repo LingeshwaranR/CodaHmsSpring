@@ -2,7 +2,6 @@ package global.coda.hms.service;
 
 import global.coda.hms.mapper.DoctorMapper;
 import global.coda.hms.model.Doctor;
-import global.coda.hms.model.Patient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class DoctorService {
     /**
      * The Mapper.
      */
-    DoctorMapper mapper;
+    private DoctorMapper mapper;
     private static Logger LOGGER = LogManager.getLogger(DoctorService.class);
 
     /**
@@ -98,22 +97,11 @@ public class DoctorService {
         return doctor.getPkUserId();
     }
 
-    /**
-     * Gets all patient under a doctor.
-     *
-     * @param id the id
-     * @return the all patient under a doctor
-     */
-    public List<Patient> getAllPatientUnderADoctor(int id) {
-        LOGGER.traceEntry();
-        List<Patient> patientList = mapper.getPatientUnderADoctor(id);
-        LOGGER.traceExit(patientList);
-        return patientList;
-    }
 
     /**
      * Gets all patients under all doctors.
      *
+     * @param id the id
      * @return the all patients under all doctors
      */
     public List<Doctor> getAllPatientsUnderAllDoctors(int id) {

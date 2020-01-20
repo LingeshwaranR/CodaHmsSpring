@@ -1,9 +1,11 @@
 package global.coda.hms.controller;
 
 
+import global.coda.hms.exception.SystemException;
 import global.coda.hms.model.CustomResponse;
 import global.coda.hms.model.Doctor;
 import global.coda.hms.service.DoctorService;
+import org.apache.catalina.connector.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public class DoctorController {
      * The Doctor service.
      */
     @Autowired
-    DoctorService doctorService;
+    private DoctorService doctorService;
     private static Logger LOGGER = LogManager.getLogger(PatientController.class);
 
     /**
@@ -41,7 +43,7 @@ public class DoctorController {
         LOGGER.entry(doctor);
         CustomResponse<Integer> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(doctorService.createDoctor(doctor));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -57,7 +59,7 @@ public class DoctorController {
         LOGGER.traceEntry();
         CustomResponse<List<Doctor>> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(doctorService.getAllDoctors());
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -74,7 +76,7 @@ public class DoctorController {
         LOGGER.entry(id);
         CustomResponse<Doctor> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(doctorService.getDoctorById(id));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -91,7 +93,7 @@ public class DoctorController {
         LOGGER.entry(doctor);
         CustomResponse<Integer> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(doctorService.updateDoctor(doctor));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -109,7 +111,7 @@ public class DoctorController {
         LOGGER.entry(doctor);
         CustomResponse<Integer> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(doctorService.deleteDoctor(doctor));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -122,16 +124,17 @@ public class DoctorController {
      * @return the all patients under a doctor
      */
     @GetMapping("/patients")
-    public CustomResponse<List<Doctor>> getAllPatientsUnderADoctors(@PathParam("doctorId") Integer doctorId) {
+    public CustomResponse<List<Doctor>> getAllPatientsUnderADoctors(@PathParam("doctorId") Integer doctorId) throws SystemException {
         LOGGER.entry(doctorId);
         if (doctorId == null) {
             doctorId = 0;
         }
         CustomResponse<List<Doctor>> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(doctorService.getAllPatientsUnderAllDoctors(doctorId));
         LOGGER.traceExit(customResponse);
+
         return customResponse;
     }
 

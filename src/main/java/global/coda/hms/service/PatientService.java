@@ -17,15 +17,20 @@ public class PatientService {
     /**
      * The Mapper.
      */
-    PatientMapper mapper;
+    private PatientMapper mapper;
 
     /**
      * Instantiates a new Patient service.
      *
      * @param mapper the mapper
      */
-  private   static Logger LOGGER= LogManager.getLogger(PatientService.class);
+    private static Logger LOGGER = LogManager.getLogger(PatientService.class);
 
+    /**
+     * Instantiates a new Patient service.
+     *
+     * @param mapper the mapper
+     */
     public PatientService(PatientMapper mapper) {
         this.mapper = mapper;
     }

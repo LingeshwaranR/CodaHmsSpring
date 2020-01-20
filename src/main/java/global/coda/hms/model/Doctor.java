@@ -30,14 +30,27 @@ public class Doctor extends User {
      */
     String specialist;
 
+    /**
+     * Gets patient list.
+     *
+     * @return the patient list
+     */
     public List<Patient> getPatientList() {
         return patientList;
     }
 
+    /**
+     * Sets patient list.
+     *
+     * @param patientList the patient list
+     */
     public void setPatientList(List<Patient> patientList) {
         this.patientList = patientList;
     }
 
+    /**
+     * The Patient list.
+     */
     List<Patient> patientList;
 
 }

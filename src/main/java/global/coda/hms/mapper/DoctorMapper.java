@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -103,23 +102,22 @@ public interface DoctorMapper {
     /**
      * Gets all patient under all doctors.
      *
+     * @param id the id
      * @return the all patient under all doctors
      */
 //PATIENT LIST UNDER ALL DOCTOR
     @Select("<script> select pk_user_id,username,email,password,fk_role_id,specialist from t_user join t_doctor on t_user.pk_user_id = t_doctor.fk_user_id  where t_user.is_active=1 and t_doctor.is_active=1 <if test='id !=0'> and  pk_user_id=#{id} </if> </script>")
     @Results(value = {
-            @Result(property="pkUserId", column="pk_user_id"),
-            @Result(property="username", column="username"),
-            @Result(property="email", column="email"),
-            @Result(property="password", column="password"),
-            @Result(property="specialist", column="specialist"),
-            @Result(property="fkRoleId", column="fk_role_id"),
-            @Result(property="patientList", javaType=List.class, column="pk_user_id",
-                    many=@Many(select  ="getPatientUnderADoctor"))
+            @Result(property = "pkUserId", column = "pk_user_id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "specialist", column = "specialist"),
+            @Result(property = "fkRoleId", column = "fk_role_id"),
+            @Result(property = "patientList", javaType = List.class, column = "pk_user_id",
+                    many = @Many(select = "getPatientUnderADoctor"))
     })
     List<Doctor> getAllPatientUnderAllDoctors(int id);
-
-
 
 
 }

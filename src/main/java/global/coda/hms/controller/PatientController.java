@@ -1,10 +1,10 @@
 package global.coda.hms.controller;
 
 
-
 import global.coda.hms.model.CustomResponse;
 import global.coda.hms.model.Patient;
 import global.coda.hms.service.PatientService;
+import org.apache.catalina.connector.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,8 @@ public class PatientController {
      * The Patient service.
      */
     @Autowired
-    PatientService patientService;
-    private   static Logger LOGGER= LogManager.getLogger(PatientController.class);
+   private PatientService patientService;
+    private static Logger LOGGER = LogManager.getLogger(PatientController.class);
 
 
     /**
@@ -42,7 +42,7 @@ public class PatientController {
         LOGGER.traceEntry();
         CustomResponse<List<Patient>> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(patientService.getAllPatients());
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -59,7 +59,7 @@ public class PatientController {
         LOGGER.entry(id);
         CustomResponse<Patient> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(patientService.getPatientById(id));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -76,7 +76,7 @@ public class PatientController {
         LOGGER.entry(patient);
         CustomResponse<Integer> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(patientService.createPatient(patient));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -93,7 +93,7 @@ public class PatientController {
         LOGGER.entry(patient);
         CustomResponse<Integer> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(patientService.updatePatient(patient));
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -110,7 +110,7 @@ public class PatientController {
         LOGGER.entry(patient);
         CustomResponse<Integer> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
-        customResponse.setStatus(200);
+        customResponse.setStatus(Response.SC_OK);
         customResponse.setObject(patientService.deletePatient(patient));
         LOGGER.traceExit(customResponse);
         return customResponse;
