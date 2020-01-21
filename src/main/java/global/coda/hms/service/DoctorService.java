@@ -17,7 +17,7 @@ public class DoctorService {
     /**
      * The Mapper.
      */
-    private DoctorMapper mapper;
+    private  DoctorMapper mapper;
     private static Logger LOGGER = LogManager.getLogger(DoctorService.class);
 
     /**
