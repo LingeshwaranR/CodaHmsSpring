@@ -6,6 +6,7 @@ import global.coda.hms.model.CustomResponse;
 import global.coda.hms.model.Doctor;
 import global.coda.hms.service.DoctorService;
 import org.apache.catalina.connector.Response;
+import org.apache.catalina.filters.RequestFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
@@ -55,11 +57,12 @@ public class DoctorController {
      * @return the all
      */
     @GetMapping("/getAllDoctor")
-    public CustomResponse<List<Doctor>> getAll() {
+    public CustomResponse<List<Doctor>> getAll(HttpServletRequest httpServletRequest) {
         LOGGER.traceEntry();
         CustomResponse<List<Doctor>> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);
         customResponse.setStatus(Response.SC_OK);
+        customResponse.setRequestId((Integer) httpServletRequest.getAttribute("requestId"));
         customResponse.setObject(doctorService.getAllDoctors());
         LOGGER.traceExit(customResponse);
         return customResponse;
@@ -137,6 +140,7 @@ public class DoctorController {
 
         return customResponse;
     }
+
 
 
 }

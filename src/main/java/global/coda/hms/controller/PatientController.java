@@ -39,6 +39,7 @@ public class PatientController {
      */
     @GetMapping("/getAllPatient")
     public CustomResponse<List<Patient>> getAll() {
+
         LOGGER.traceEntry();
         CustomResponse<List<Patient>> customResponse = new CustomResponse<>();
         customResponse.setSuccess(true);

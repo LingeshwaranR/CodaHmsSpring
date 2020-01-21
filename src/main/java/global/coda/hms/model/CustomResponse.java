@@ -71,7 +71,15 @@ public class CustomResponse<T> {
     /**
      * The Object.
      */
+    Integer requestId;
     T object;
 
 
+    public Integer getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
+    }
 }
