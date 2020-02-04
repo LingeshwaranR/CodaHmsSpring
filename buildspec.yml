@@ -10,6 +10,6 @@ phases:
       - ./gradlew bootJar
 artifacts:
   files:
-    - build/libs/hms-v3-0.0.1-SNAPSHOT.jar
+    - build/libs/hms-0.0.1-SNAPSHOT.jar
     - .ebextensions\fixpath.config
   discard-paths: yes
