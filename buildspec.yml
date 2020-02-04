@@ -11,5 +11,5 @@ phases:
 artifacts:
   files:
     - build/libs/hms-0.0.1-SNAPSHOT.jar
-    - .ebextensions\fixpath.config
+    - .ebextensions\fix-path.config
   discard-paths: yes
