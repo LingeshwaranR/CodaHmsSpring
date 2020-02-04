@@ -28,7 +28,6 @@ public class Doctor extends User {
     /**
      * The Specialization.
      */
-    String specialist;
 
     /**
      * Gets patient list.
@@ -51,6 +50,7 @@ public class Doctor extends User {
     /**
      * The Patient list.
      */
+    String specialist;
     List<Patient> patientList;
 
 }
