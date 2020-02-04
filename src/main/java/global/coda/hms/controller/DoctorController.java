@@ -142,6 +142,15 @@ public class DoctorController {
         return customResponse;
     }
 
-
+    @GetMapping("/aws")
+    public CustomResponse<String> awsCheck() {
+        LOGGER.entry();
+        CustomResponse<String> customResponse = new CustomResponse<>();
+        customResponse.setSuccess(true);
+        customResponse.setStatus(Response.SC_OK);
+        customResponse.setObject("SuccessFully Runing -- Aws pipeline");
+        LOGGER.traceExit(customResponse);
+        return customResponse;
+    }
 
 }
