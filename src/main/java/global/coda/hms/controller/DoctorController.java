@@ -6,7 +6,6 @@ import global.coda.hms.model.CustomResponse;
 import global.coda.hms.model.Doctor;
 import global.coda.hms.service.DoctorService;
 import org.apache.catalina.connector.Response;
-import org.apache.catalina.filters.RequestFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
